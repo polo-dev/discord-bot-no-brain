@@ -1,8 +1,8 @@
 {
   "name": "discord",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "un bot discord des familles",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,7 @@
     "discord.js": "^11.1.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
-    "opusscript": "0.0.3"
+    "opusscript": "0.0.3",
+    "pr0gramm-api": "^2.0.0"
   }
 }
