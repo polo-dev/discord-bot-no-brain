@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 require('dotenv').config()
 const client = new Discord.Client();
+const pr0gramm =  require('./pr0gramm.js');
 
 client.on('ready', () => {
   console.log('I am ready!');
@@ -21,6 +22,16 @@ client.on('message', message => {
   if (message.content === 'what is my avatar') {
     // Send the user's avatar URL
     message.reply(message.author.avatarURL);
+  }
+  // If the message beggin with pr0
+
+  if(message.content.substring(0,4).toLowerCase() === 'pr0 ') {
+    //send a random pr0gramm image with the tag
+    var img = pr0gramm.getImage(message.content.substring(4));
+    img.then(function(v) {
+        console.log(v);
+        message.channel.send(v);
+    });
   }
 });
 
