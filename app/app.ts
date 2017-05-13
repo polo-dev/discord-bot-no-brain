@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-require('dotenv').config()
+require('dotenv').config();
 const client = new Discord.Client();
 const pr0gramm =  require('./pr0gramm.js');
 
@@ -8,7 +8,7 @@ client.on('ready', () => {
 });
 
 // Create an event listener for messages
-client.on('message', message => {
+client.on('message', (message :any) => {
   // If the message is "ping"
   if (message.content === 'ping') {
     // Send "pong" to the same channel
@@ -17,22 +17,32 @@ client.on('message', message => {
 });
 
 // Create an event listener for messages
-client.on('message', message => {
+client.on('message', (message :any) => {
   // If the message is "what is my avatar"
   if (message.content === 'what is my avatar') {
     // Send the user's avatar URL
     message.reply(message.author.avatarURL);
   }
-  // If the message beggin with pr0
 
-  if(message.content.substring(0,4).toLowerCase() === 'pr0 ') {
+  // If the message beggin with pr0
     //send a random pr0gramm image with the tag
+  if(message.content.substring(0,4).toLowerCase() === 'pr0 ') {
     var img = pr0gramm.getImage(message.content.substring(4));
-    img.then(function(v) {
-        console.log(v);
-        message.channel.send(v);
+    img.then(function(img: string){
+      message.channel.send(img);
+    })
+  } else if(message.content.substring(0,8).toLowerCase() === 'pr0-vid ') {
+    var img = pr0gramm.getVideo(message.content.substring(8));
+    img.then(function(img: string) {
+        message.channel.send(img);
+    });
+  } else if(message.content.substring(0,8).toLowerCase() === 'pr0-all ') {
+    var img = pr0gramm.getVideoAndImage(message.content.substring(8));
+    img.then(function(img: string) {
+        message.channel.send(img);
     });
   }
+
 });
 
 // Create a new webhook

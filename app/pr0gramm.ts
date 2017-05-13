@@ -16,31 +16,22 @@ async function main() {
 }
 main();
 
-
-
 module.exports = {
-  getItems: async function(tag) {
-    return mainItems = await api.items.getItems({
+  getItems: async function(tag: string) {
+    let mainItems = await api.items.getItems({
         promoted: true,
         flags: pr0.ItemFlags.All,
         tags: [tag]
     });
+    return mainItems;
   },
 
-  getImage: async function(tag) {
+  getImage: async function(tag: string) {
 
-    mainItems = await api.items.getItems({
-        promoted: true,
-        flags: pr0.ItemFlags.All,
-        tags: [tag]
-    });
-
-    console.log(mainItems.items);
-
+    let mainItems = await this.getItems(tag);
     if(typeof mainItems.items === 'undefined' || mainItems.items.length === 0) {
       return "Soz, j'ai rien pour toi ;(";
     }
-
     let random, i = 0;
     do {
       random = Math.floor(Math.random() * mainItems.items.length);
@@ -50,15 +41,11 @@ module.exports = {
     while (mainItems.items[random].image.substr(-3) ===  "mp4" || mainItems.items.length < i);
     //console.dir(mainItems.items[random]);
     console.log(mainItems.items[random].image);
-    return url = 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
+    return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
   },
 
-  getVideo:async function(tag) {
-    let mainItems = await api.items.getItems({
-        promoted: true,
-        flags: pr0.ItemFlags.All,
-        tags: [tag]
-    });
+  getVideo:async function(tag: string) {
+    let mainItems = await this.getItems(tag);
 
     let random;
 
@@ -68,22 +55,22 @@ module.exports = {
     while (mainItems.items[random].image.substr(-3) ==!  "mp4");
     //console.dir(mainItems.items[random]);
 
-    return url = 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
+    return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
   },
 
-  getVideoAndImage:async function(tag) {
-    let mainItems = await api.items.getItems({
-        promoted: true,
-        flags: pr0.ItemFlags.All,
-        tags: [tag]
-    });
+  getVideoAndImage:async function(tag: string) {
+    let mainItems = await this.getItems(tag);
+
+    if(typeof mainItems.items === 'undefined' || mainItems.items.length === 0) {
+      return "Soz, j'ai rien pour toi ;(";
+    }
 
     let random = Math.floor(Math.random() * mainItems.items.length) + 1;
 
-    return url = 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
+    return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
   },
 
-  bar: function(req, res, next) {
+  bar: function(req: any, res: any, next: any) {
     this.foo();
   }
 
