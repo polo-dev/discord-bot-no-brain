@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client = new Discord.Client();
 const pr0gramm = require('./pr0gramm.js');
+const fun = require('./fun.js');
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -12,37 +13,26 @@ client.on('message', (message) => {
         // Send "pong" to the same channel
         message.channel.send('pong');
     }
-});
-// Create an event listener for messages
-client.on('message', (message) => {
-    // If the message is "what is my avatar"
     if (message.content === 'what is my avatar') {
         // Send the user's avatar URL
         message.reply(message.author.avatarURL);
     }
-    // If the message beggin with pr0
-    //send a random pr0gramm image with the tag
-    if (message.content.substring(0, 4).toLowerCase() === 'pr0 ') {
-        var img = pr0gramm.getImage(message.content.substring(4));
-        img.then(function (img) {
-            message.channel.send(img);
-        });
-    }
-    else if (message.content.substring(0, 8).toLowerCase() === 'pr0-vid ') {
-        var img = pr0gramm.getVideo(message.content.substring(8));
-        img.then(function (img) {
-            message.channel.send(img);
-        });
-    }
-    else if (message.content.substring(0, 8).toLowerCase() === 'pr0-all ') {
-        var img = pr0gramm.getVideoAndImage(message.content.substring(8));
-        img.then(function (img) {
-            message.channel.send(img);
-        });
-    }
+    fun.getMessage(message);
+    pr0gramm.getMessage(message);
+    getHelp(message);
 });
 // Create a new webhook
 //const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);
 // Send a message using the webhook
 //hook.send('I am now alive!');
 client.login(process.env.TOKEN);
+function getHelp(message) {
+    if (message.content === '/help') {
+        var help = "```Pr0 <tag> : image de pr0gramm\n";
+        help += "Pr0-vid <tag> : mp4 de pr0gramm\n";
+        help += "Pr0-all <tag> : image ou mp4 de pr0gramm\n";
+        help += "Gay : Parce que vous voulez savoir si c'est gay";
+        help += "```";
+        message.channel.send(help);
+    }
+}

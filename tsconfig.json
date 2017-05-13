@@ -1,10 +1,12 @@
 {
   "files": [
-        "app/pr0gramm.ts",
-        "app/*.ts"
+      "app/pr0gramm.ts",
+      "app/fun.ts",
+      "app/*.ts",
+      "app/*"
     ],
     "compilerOptions": {
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "target": "es6"
     }
 }

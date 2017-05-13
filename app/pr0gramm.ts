@@ -17,6 +17,37 @@ async function main() {
 main();
 
 module.exports = {
+  getMessage: async function (message: any)
+  {
+    var msg = message.content.toLowerCase();
+    let image = '';
+    if(message.author.id !== '306474787180511233')
+    {
+      if(message.content.substring(0,4).toLowerCase() === 'pr0 ')
+      {
+        let tag = message.content.substring(4);
+        image = await this.getImage(tag);
+      }
+      else if(message.content.substring(0,8).toLowerCase() === 'pr0-vid ')
+      {
+        let tag = message.content.substring(8);
+        image = await this.getVideo(tag)
+      }
+      else if (message.content.substring(0,8).toLowerCase() === 'pr0-all ')
+      {
+          let tag = message.content.substring(8);
+          image = await this.getVideoAndImage(tag);
+      }
+
+      if(image !== '')
+      {
+        message.channel.send(image);
+      }
+    }
+  },
+
+
+
   getItems: async function(tag: string) {
     let mainItems = await api.items.getItems({
         promoted: true,
@@ -45,15 +76,18 @@ module.exports = {
   },
 
   getVideo:async function(tag: string) {
+
     let mainItems = await this.getItems(tag);
+    if(typeof mainItems.items === 'undefined' || mainItems.items.length === 0) {
+      return "Soz, j'ai rien pour toi ;(";
+    }
 
-    let random;
-
+    let random, i = 0;
     do {
       random = Math.floor(Math.random() * mainItems.items.length) + 1;
+      i++;
     }
-    while (mainItems.items[random].image.substr(-3) ==!  "mp4");
-    //console.dir(mainItems.items[random]);
+    while (mainItems.items[random].image.substr(-3) !==  "mp4");
 
     return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
   },
@@ -66,12 +100,7 @@ module.exports = {
     }
 
     let random = Math.floor(Math.random() * mainItems.items.length) + 1;
-
     return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
-  },
-
-  bar: function(req: any, res: any, next: any) {
-    this.foo();
   }
 
 }

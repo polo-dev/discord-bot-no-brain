@@ -24,6 +24,29 @@ function main() {
 }
 main();
 module.exports = {
+    getMessage: function (message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var msg = message.content.toLowerCase();
+            let image = '';
+            if (message.author.id !== '306474787180511233') {
+                if (message.content.substring(0, 4).toLowerCase() === 'pr0 ') {
+                    let tag = message.content.substring(4);
+                    image = yield this.getImage(tag);
+                }
+                else if (message.content.substring(0, 8).toLowerCase() === 'pr0-vid ') {
+                    let tag = message.content.substring(8);
+                    image = yield this.getVideo(tag);
+                }
+                else if (message.content.substring(0, 8).toLowerCase() === 'pr0-all ') {
+                    let tag = message.content.substring(8);
+                    image = yield this.getVideoAndImage(tag);
+                }
+                if (image !== '') {
+                    message.channel.send(image);
+                }
+            }
+        });
+    },
     getItems: function (tag) {
         return __awaiter(this, void 0, void 0, function* () {
             let mainItems = yield api.items.getItems({
@@ -54,11 +77,14 @@ module.exports = {
     getVideo: function (tag) {
         return __awaiter(this, void 0, void 0, function* () {
             let mainItems = yield this.getItems(tag);
-            let random;
+            if (typeof mainItems.items === 'undefined' || mainItems.items.length === 0) {
+                return "Soz, j'ai rien pour toi ;(";
+            }
+            let random, i = 0;
             do {
                 random = Math.floor(Math.random() * mainItems.items.length) + 1;
-            } while (mainItems.items[random].image.substr(-3) == !"mp4");
-            //console.dir(mainItems.items[random]);
+                i++;
+            } while (mainItems.items[random].image.substr(-3) !== "mp4");
             return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
         });
     },
@@ -71,8 +97,5 @@ module.exports = {
             let random = Math.floor(Math.random() * mainItems.items.length) + 1;
             return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
         });
-    },
-    bar: function (req, res, next) {
-        this.foo();
     }
 };
