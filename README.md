@@ -1,7 +1,7 @@
 # discord-bot-no-brain
-####no brain
-####Techno node-js and typescript
----
+#### no brain
+#### Techno node-js and typescript
+
 ## Installation :
 
 1. Clone repo
@@ -17,16 +17,14 @@
 
 6. npm start and it should run
 
----
 
 ## For modifications
 
 Update .ts filed in the folder app and then run gulp
 
----
 ## Features :
 
-+ ###Pr0gramm , cmd :
++ ### Pr0gramm , cmd :
   + Pr0 \<tag>: img only
   + Pr0-vid \<tag>: video only
   + Pr0-all \<tag>: video and image
