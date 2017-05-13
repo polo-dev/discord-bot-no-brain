@@ -4,6 +4,9 @@ const file = 'dist/data/wtf.json';
 module.exports = {
   getMessage: function (message: any)
   {
+    var data = jsonfile.readFileSync(file);
+    var splitMessage = message.content.split(" ");
+
     var msg = message.content.toLowerCase();
     if(message.author.id !== '306474787180511233')
     {
@@ -11,13 +14,25 @@ module.exports = {
       {
         this.getGay(message);
       }
-      if (msg.substring(0,4) === "add ")
+      if (splitMessage[0] === "/add")
       {
-        this.addPaul(message);
+        for (var i = 0; i < data.name.length; i++)
+        {
+          if (splitMessage[1] === data.name[i])
+          {
+            this.addMessageName(message, data.name[i], data, splitMessage);
+          }
+        }
       }
-      if (msg.includes('paul'))
+      else
       {
-        this.getPaul(message);
+        for (var i = 0; i < data.name.length; i++)
+        {
+          if (msg.includes(data.name[i]))
+          {
+            this.getMessageName(message, data.name[i], data);
+          }
+        }
       }
     }
   },
@@ -41,22 +56,23 @@ module.exports = {
       }
     }
   },
-  addPaul: function (message: any)
+  addMessageName: function (message: any, name: string, data: any, splitMessage: any)
   {
-    var data = jsonfile.readFileSync(file);
-    let string = message.content.substring(4);
-    data['wtf'].push(string);
-    console.log(data.wtf);
+    splitMessage.splice(0, 2);
+    data[name].push(splitMessage.join(" "));
+    console.log('string ajouté: ' + splitMessage.join(" "));
     jsonfile.writeFile(file, data, {space: 4}, function (err: any) {
       if(err)
         console.error(err)
+      else
+        message.channel.send("Message ajouté ;)");
     })
   },
-  getPaul: function (message: any)
+  getMessageName: function (message: any, name: string, data: any)
   {
-    var data = jsonfile.readFileSync(file);
-    var random = Math.floor(Math.random() * data.wtf.length);
-    console.log(data.wtf[random]);
-    message.channel.send(data.wtf[random]);
+    var arrayStrings = data[name];
+    console.log(arrayStrings);
+    var random = Math.floor(Math.random() * arrayStrings.length);
+    message.channel.send(arrayStrings[random]);
   }
 }
