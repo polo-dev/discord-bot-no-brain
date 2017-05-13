@@ -21,28 +21,26 @@ module.exports = {
   {
     var msg = message.content.toLowerCase();
     let image = '';
-    if(message.author.id !== '306474787180511233')
-    {
-      if(message.content.substring(0,4).toLowerCase() === 'pr0 ')
-      {
-        let tag = message.content.substring(4);
-        image = await this.getImage(tag);
-      }
-      else if(message.content.substring(0,8).toLowerCase() === 'pr0-vid ')
-      {
-        let tag = message.content.substring(8);
-        image = await this.getVideo(tag)
-      }
-      else if (message.content.substring(0,8).toLowerCase() === 'pr0-all ')
-      {
-          let tag = message.content.substring(8);
-          image = await this.getVideoAndImage(tag);
-      }
 
-      if(image !== '')
-      {
-        message.channel.send(image);
-      }
+    if(message.content.substring(0,4).toLowerCase() === 'pr0 ')
+    {
+      let tag = message.content.substring(4);
+      image = await this.getImage(tag);
+    }
+    else if(message.content.substring(0,8).toLowerCase() === 'pr0-vid ')
+    {
+      let tag = message.content.substring(8);
+      image = await this.getVideo(tag)
+    }
+    else if (message.content.substring(0,8).toLowerCase() === 'pr0-all ')
+    {
+        let tag = message.content.substring(8);
+        image = await this.getVideoAndImage(tag);
+    }
+
+    if(image !== '')
+    {
+      message.channel.send(image);
     }
   },
 

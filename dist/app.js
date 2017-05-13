@@ -3,6 +3,7 @@ require('dotenv').config();
 const client = new Discord.Client();
 const pr0gramm = require('./pr0gramm.js');
 const fun = require('./fun.js');
+const apiE621 = require('./e621.js');
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -17,9 +18,12 @@ client.on('message', (message) => {
         // Send the user's avatar URL
         message.reply(message.author.avatarURL);
     }
-    fun.getMessage(message);
-    pr0gramm.getMessage(message);
-    getHelp(message);
+    if (message.author.id !== '306474787180511233') {
+        fun.getMessage(message);
+        pr0gramm.getMessage(message);
+        apiE621.getMessage(message);
+        getHelp(message);
+    }
 });
 // Create a new webhook
 //const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);

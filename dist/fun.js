@@ -5,22 +5,20 @@ module.exports = {
         var data = jsonfile.readFileSync(file);
         var splitMessage = message.content.split(" ");
         var msg = message.content.toLowerCase();
-        if (message.author.id !== '306474787180511233') {
-            if (msg.includes('gay')) {
-                this.getGay(message);
-            }
-            if (splitMessage[0] === "/add") {
-                for (var i = 0; i < data.name.length; i++) {
-                    if (splitMessage[1] === data.name[i]) {
-                        this.addMessageName(message, data.name[i], data, splitMessage);
-                    }
+        if (msg.includes('gay')) {
+            this.getGay(message);
+        }
+        if (splitMessage[0] === "/add") {
+            for (var i = 0; i < data.name.length; i++) {
+                if (splitMessage[1] === data.name[i]) {
+                    this.addMessageName(message, data.name[i], data, splitMessage);
                 }
             }
-            else {
-                for (var i = 0; i < data.name.length; i++) {
-                    if (msg.includes(data.name[i])) {
-                        this.getMessageName(message, data.name[i], data);
-                    }
+        }
+        else {
+            for (var i = 0; i < data.name.length; i++) {
+                if (msg.includes(data.name[i])) {
+                    this.getMessageName(message, data.name[i], data);
                 }
             }
         }
@@ -53,6 +51,7 @@ module.exports = {
     },
     getMessageName: function (message, name, data) {
         var arrayStrings = data[name];
+        console.log(arrayStrings);
         var random = Math.floor(Math.random() * arrayStrings.length);
         message.channel.send(arrayStrings[random]);
     }

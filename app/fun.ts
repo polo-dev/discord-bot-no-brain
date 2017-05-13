@@ -8,30 +8,28 @@ module.exports = {
     var splitMessage = message.content.split(" ");
 
     var msg = message.content.toLowerCase();
-    if(message.author.id !== '306474787180511233')
+
+    if(msg.includes('gay'))
     {
-      if(msg.includes('gay'))
+      this.getGay(message);
+    }
+    if (splitMessage[0] === "/add")
+    {
+      for (var i = 0; i < data.name.length; i++)
       {
-        this.getGay(message);
-      }
-      if (splitMessage[0] === "/add")
-      {
-        for (var i = 0; i < data.name.length; i++)
+        if (splitMessage[1] === data.name[i])
         {
-          if (splitMessage[1] === data.name[i])
-          {
-            this.addMessageName(message, data.name[i], data, splitMessage);
-          }
+          this.addMessageName(message, data.name[i], data, splitMessage);
         }
       }
-      else
+    }
+    else
+    {
+      for (var i = 0; i < data.name.length; i++)
       {
-        for (var i = 0; i < data.name.length; i++)
+        if (msg.includes(data.name[i]))
         {
-          if (msg.includes(data.name[i]))
-          {
-            this.getMessageName(message, data.name[i], data);
-          }
+          this.getMessageName(message, data.name[i], data);
         }
       }
     }
