@@ -1,4 +1,5 @@
-var gulp = require("gulp");
+var gulp = require("gulp"),
+    watch = require("gulp-watch");
 var ts = require("gulp-typescript");
 var tsProject = ts.createProject("tsconfig.json");
 

@@ -15,6 +15,12 @@ module.exports = {
                 }
             }
         }
+        else if (splitMessage[0] === "/addName") {
+            if (splitMessage[1].length < 25)
+                this.addName(message, splitMessage[1], data, splitMessage);
+            else
+                message.reply("Le nom est trop long ! (CMB)");
+        }
         else {
             for (var i = 0; i < data.name.length; i++) {
                 if (msg.includes(data.name[i])) {
@@ -38,11 +44,28 @@ module.exports = {
             }
         }
     },
+    addName: function (message, name, data, splitMessage) {
+        if (!data.hasOwnProperty(name)) {
+            splitMessage.splice(0, 2);
+            data.name.push(name.toLowerCase());
+            data[name.toLowerCase()] = [];
+            jsonfile.writeFile(file, data, { spaces: 4 }, function (err) {
+                if (err)
+                    console.error(err);
+                else
+                    console.log(name + " ajouté ;) ");
+                message.channel.send(name + " ajouté ;)");
+            });
+        }
+        else {
+            message.channel.send("Il existe déjà votre " + name + " :'( ");
+        }
+    },
     addMessageName: function (message, name, data, splitMessage) {
         splitMessage.splice(0, 2);
         data[name].push(splitMessage.join(" "));
         console.log('string ajouté: ' + splitMessage.join(" "));
-        jsonfile.writeFile(file, data, { space: 4 }, function (err) {
+        jsonfile.writeFile(file, data, { spaces: 4 }, function (err) {
             if (err)
                 console.error(err);
             else
@@ -51,8 +74,8 @@ module.exports = {
     },
     getMessageName: function (message, name, data) {
         var arrayStrings = data[name];
-        console.log(arrayStrings);
         var random = Math.floor(Math.random() * arrayStrings.length);
+        console.log("get message : " + arrayStrings[random]);
         message.channel.send(arrayStrings[random]);
     }
 };

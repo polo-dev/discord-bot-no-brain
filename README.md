@@ -28,8 +28,17 @@ Update .ts filed in the folder app and then run gulp
   + Pr0 \<tag>: img only
   + Pr0-vid \<tag>: video only
   + Pr0-all \<tag>: video and image
-+ soon ...
++ ### e621 , cmd :
+  + /furry \<tag>: get a furry
++ ### gay (if you want to know if sth is gay) :
+  + just ask your question with the word gay in it
++ ### Add some sentences and key word
+  + /addName \<name> : will add a name keyword
+  + /add \<name> \<sentence> : will add a sentence to a name
+  + \<name> in a sentence and it will display a random phrase
 
-## Api :
+
+## Api/modules :
 
 + Pr0gramm-api : https://github.com/holzmaster/node-pr0gramm-api
++ e621 : https://github.com/effext/node-e621
