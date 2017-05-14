@@ -43,7 +43,12 @@ function getHelp(message: any)
     var help = "```Pr0 <tag> : image de pr0gramm\n"
     help += "Pr0-vid <tag> : mp4 de pr0gramm\n"
     help += "Pr0-all <tag> : image ou mp4 de pr0gramm\n"
-    help += "Gay : Parce que vous voulez savoir si c'est gay"
+    help += "Gay : Parce que vous voulez savoir si c'est gay\n"
+    help += "/furry <tag> : deviner ?\n"
+    help += "\n"
+    help += "/addName <name> : ajoute un mot Clé\n"
+    help += "/addM <name> <sentence> : ajoute une phrase à votre mot clé ;)\n"
+    help += "<name> : utilisez votre mot clé !\n"
     help += "```"
     message.channel.send(help)
   }

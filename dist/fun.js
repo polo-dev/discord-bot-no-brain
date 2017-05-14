@@ -8,9 +8,9 @@ module.exports = {
         if (msg.includes('gay')) {
             this.getGay(message);
         }
-        if (splitMessage[0] === "/add") {
+        if (splitMessage[0] === "/addM") {
             for (var i = 0; i < data.name.length; i++) {
-                if (splitMessage[1] === data.name[i]) {
+                if (splitMessage[1].toLowerCase() === data.name[i]) {
                     this.addMessageName(message, data.name[i], data, splitMessage);
                 }
             }

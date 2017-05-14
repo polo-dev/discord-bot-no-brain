@@ -34,7 +34,7 @@ Update .ts filed in the folder app and then run gulp
   + just ask your question with the word gay in it
 + ### Add some sentences and key word
   + /addName \<name> : will add a name keyword
-  + /add \<name> \<sentence> : will add a sentence to a name
+  + /addM \<name> \<sentence> : will add a sentence to a name
   + \<name> in a sentence and it will display a random phrase
 
 
