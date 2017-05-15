@@ -15,8 +15,10 @@
     "e621": "0.0.2",
     "express": "^4.15.2",
     "jsonfile": "^3.0.0",
+    "mongoose": "^4.9.9",
     "opusscript": "0.0.3",
-    "pr0gramm-api": "^2.0.0"
+    "pr0gramm-api": "^2.0.0",
+    "unirest": "^0.5.1"
   },
   "devDependencies": {
     "browserify": "^14.3.0",

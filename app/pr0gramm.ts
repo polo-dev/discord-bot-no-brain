@@ -62,12 +62,15 @@ module.exports = {
       return "Soz, j'ai rien pour toi ;(";
     }
     let random, i = 0;
+    console.log( mainItems.items.length);
     do {
       random = Math.floor(Math.random() * mainItems.items.length);
       console.log(random);
       i++;
+      console.log('i: ' + i + ' items : ' + mainItems.items.length);
+      console.log(mainItems.items.length >= i);
     }
-    while (mainItems.items[random].image.substr(-3) ===  "mp4" || mainItems.items.length < i);
+    while (mainItems.items[random].image.substr(-3) ===  "mp4" && mainItems.items.length >= i);
     //console.dir(mainItems.items[random]);
     console.log(mainItems.items[random].image);
     return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
@@ -85,7 +88,7 @@ module.exports = {
       random = Math.floor(Math.random() * mainItems.items.length);
       i++;
     }
-    while (mainItems.items[random].image.substr(-3) !==  "mp4" || mainItems.items.length < i);
+    while (mainItems.items[random].image.substr(-3) !==  "mp4" && mainItems.items.length >= i);
 
     return 'http://vid.pr0gramm.com/' + mainItems.items[random].image;
   },

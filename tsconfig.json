@@ -2,11 +2,13 @@
   "files": [
       "app/pr0gramm.ts",
       "app/fun.ts",
-      "app/*.ts",
-      "app/*"
+      "app/e621.ts",
+      "app/app.ts",
+      "app/love.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": false,
-        "target": "es6"
+        "target": "es6",
+        "lib": ["es6"]
     }
 }

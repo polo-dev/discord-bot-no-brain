@@ -4,6 +4,8 @@ const client = new Discord.Client();
 const pr0gramm = require('./pr0gramm.js');
 const fun = require('./fun.js');
 const apiE621 = require('./e621.js');
+const love = require('./love.js');
+const server = require('../server/Api.js');
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -22,6 +24,8 @@ client.on('message', (message) => {
         fun.getMessage(message);
         pr0gramm.getMessage(message);
         apiE621.getMessage(message);
+        love.getMessage(message);
+        server.getMessage(message);
         getHelp(message);
     }
 });
@@ -41,6 +45,7 @@ function getHelp(message) {
         help += "/addName <name> : ajoute un mot Clé\n";
         help += "/addM <name> <sentence> : ajoute une phrase à votre mot clé ;)\n";
         help += "<name> : utilisez votre mot clé !\n";
+        help += "/love <name1> <name2> : calculateur d'amour ! <3\n";
         help += "```";
         message.channel.send(help);
     }
