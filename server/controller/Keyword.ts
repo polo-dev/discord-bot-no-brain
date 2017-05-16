@@ -1,8 +1,10 @@
-const KeywordModel = require('../model/Keyword');
+var KeywordModel = require('../model/Keyword');
+var SentenceModel = require('../model/Sentence');
+
 
 module.exports = {
 
-  getKeywords: function (message) {
+  getKeywords: async function (message) {
     KeywordModel.find()
     .exec((err, keys) => {
       if (err) { console.log(err);message.send.channel('mince alors, y a eu une erreur ;('); }
@@ -10,7 +12,7 @@ module.exports = {
       message.reply(keys);
     });
   },
-  getKeyword: function(message, key) {
+  getKeyword: async function(message, key) {
     var query = KeywordModel.findOne({ 'keyword': key }).exec();
     console.log(query);
     query.then(function(res) {
@@ -20,7 +22,7 @@ module.exports = {
     })
   },
 
-  createKeyword: function (message, key) {
+  createKeyword: async function (message, key) {
     const keyword = new KeywordModel
     keyword.keyword = key
     var promise = keyword.save()
@@ -32,11 +34,11 @@ module.exports = {
       message.reply("Une erreur est survenu, un doublon peut être ?");
     })
   },
-  deleteKeyword: function (message, key) {
+  deleteKeyword: async function (message, key) {
     var query = KeywordModel.findOne({ 'keyword': key }, function (err) {
       if (err) {
         console.log(err);
-        return handleError(err);
+        return err;
       }
     });
     var promise = query.exec();

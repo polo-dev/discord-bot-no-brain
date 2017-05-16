@@ -4,7 +4,8 @@
       "app/fun.ts",
       "app/e621.ts",
       "app/app.ts",
-      "app/love.ts"
+      "app/love.ts",
+      "server/**"
     ],
     "compilerOptions": {
         "noImplicitAny": false,

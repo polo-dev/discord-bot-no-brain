@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const KeywordController = require('./controller/Keyword');
 const SentenceController = require('./controller/Sentence');
 
@@ -16,6 +16,9 @@ module.exports = {
         break;
       case '/addmessage':
           SentenceController.addSentence(message, splitMessage[1], splitMessage)
+        break;
+      case '/test':
+          SentenceController.getSentenceByKey(message, splitMessage[1])
         break;
     }
   }
