@@ -11,15 +11,18 @@ var SentenceModel = require('../model/Sentence');
 module.exports = {
     getKeywords: function (message) {
         return __awaiter(this, void 0, void 0, function* () {
-            KeywordModel.find()
+            var keys = yield KeywordModel.find({}, { "keyword": true })
                 .exec((err, keys) => {
                 if (err) {
                     console.log(err);
                     message.send.channel('mince alors, y a eu une erreur ;(');
                 }
-                console.log(keys);
-                message.reply(keys);
             });
+            var akeys = [];
+            keys.map(function (k) {
+                akeys.push(k.keyword);
+            });
+            return akeys;
         });
     },
     getKeyword: function (message, key) {

@@ -4,8 +4,10 @@ const KeywordController = require('./controller/Keyword');
 const SentenceController = require('./controller/Sentence');
 
 module.exports = {
-  getMessage: function(message) {
+  getMessage: async function(message) {
     var splitMessage = message.content.toLowerCase().split(" ");
+    var keys = await KeywordController.getKeywords()
+    var msg = message.content.toLowerCase()
 
     switch (splitMessage[0]) {
       case '/addkey':
@@ -19,6 +21,18 @@ module.exports = {
         break;
       case '/test':
           SentenceController.getSentenceByKey(message, splitMessage[1])
+        break;
+      case '/test1':
+          KeywordController.getKeywords(message)
+        break;
+      default:
+        for (var i = 0; i < keys.length; i++)
+        {
+          if (msg.includes(keys[i]))
+          {
+            SentenceController.getSentenceByKey(message, keys[i])
+          }
+        }
         break;
     }
   }

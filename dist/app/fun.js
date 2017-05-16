@@ -8,26 +8,34 @@ module.exports = {
         if (msg.includes('gay')) {
             this.getGay(message);
         }
-        if (splitMessage[0] === "/addM") {
-            for (var i = 0; i < data.name.length; i++) {
-                if (splitMessage[1].toLowerCase() === data.name[i]) {
-                    this.addMessageName(message, data.name[i], data, splitMessage);
-                }
+        /*
+        if (splitMessage[0] === "/addM")
+        {
+          for (var i = 0; i < data.name.length; i++)
+          {
+            if (splitMessage[1].toLowerCase() === data.name[i])
+            {
+              this.addMessageName(message, data.name[i], data, splitMessage);
             }
+          }
         }
-        else if (splitMessage[0] === "/addName") {
-            if (splitMessage[1].length < 25)
-                this.addName(message, splitMessage[1], data, splitMessage);
-            else
-                message.reply("Le nom est trop long ! (CMB)");
-        }
-        else {
-            for (var i = 0; i < data.name.length; i++) {
-                if (msg.includes(data.name[i])) {
-                    this.getMessageName(message, data.name[i], data);
-                }
+        else if(splitMessage[0] === "/addName")
+        {
+          if(splitMessage[1].length < 25)
+            this.addName(message, splitMessage[1], data, splitMessage)
+          else
+            message.reply("Le nom est trop long ! (CMB)")
+        }*/
+        /*else
+        {
+          for (var i = 0; i < data.name.length; i++)
+          {
+            if (msg.includes(data.name[i]))
+            {
+              this.getMessageName(message, data.name[i], data);
             }
-        }
+          }
+        }*/
     },
     getGay: function (message) {
         let random = Math.floor(Math.random() * 100) + 1;

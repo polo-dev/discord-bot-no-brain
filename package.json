@@ -10,12 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "^3.0.0",
     "discord.js": "^11.1.0",
     "dotenv": "^4.0.0",
     "e621": "0.0.2",
     "express": "^4.15.2",
+    "gulp-install": "^1.1.0",
     "jsonfile": "^3.0.0",
     "mongoose": "^4.9.9",
+    "node-opus": "^0.2.6",
     "opusscript": "0.0.3",
     "pr0gramm-api": "^2.0.0",
     "unirest": "^0.5.1"
@@ -23,6 +26,7 @@
   "devDependencies": {
     "browserify": "^14.3.0",
     "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
     "gulp-typescript": "^3.1.6",
     "gulp-watch": "^4.3.11",
     "tsify": "^3.0.1",

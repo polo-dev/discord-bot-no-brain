@@ -48,9 +48,11 @@ module.exports = {
                     sentences.forEach(function (sentence) {
                         sentenceMap.push(sentence);
                     });
-                    var random = Math.floor(Math.random() * sentenceMap.length);
-                    console.log("get message : " + sentenceMap[random]);
-                    message.reply(sentenceMap[random].sentence);
+                    if (sentences && sentences[0]) {
+                        var random = Math.floor(Math.random() * sentenceMap.length);
+                        console.log("get message : " + sentenceMap[random]);
+                        message.reply(sentenceMap[random].sentence);
+                    }
                 });
             }
         });

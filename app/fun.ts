@@ -12,6 +12,7 @@ module.exports = {
     {
       this.getGay(message);
     }
+    /*
     if (splitMessage[0] === "/addM")
     {
       for (var i = 0; i < data.name.length; i++)
@@ -28,8 +29,8 @@ module.exports = {
         this.addName(message, splitMessage[1], data, splitMessage)
       else
         message.reply("Le nom est trop long ! (CMB)")
-    }
-    else
+    }*/
+    /*else
     {
       for (var i = 0; i < data.name.length; i++)
       {
@@ -38,7 +39,7 @@ module.exports = {
           this.getMessageName(message, data.name[i], data);
         }
       }
-    }
+    }*/
   },
   getGay: function (message: any)
   {
