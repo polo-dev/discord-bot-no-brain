@@ -43,7 +43,7 @@ module.exports = {
         if(sentences && sentences[0]) {
           var random = Math.floor(Math.random() * sentenceMap.length)
           console.log("get message : " + sentenceMap[random])
-          message.reply(sentenceMap[random].sentence)
+          message.channel.send(sentenceMap[random].sentence)
         }
       })
     }

@@ -6,6 +6,16 @@ const fun = require('./fun.js');
 const apiE621 = require('./e621.js');
 const love = require('./love.js');
 const server = require('../server/Api.js');
+const bot = require("discord-music-bot");
+// music
+var serverName = "supdeweb-3wa";
+var textChannelName = "etudiants";
+var voiceChannelName = "General";
+var aliasesFile = "/files";
+var botToken = process.env.TOKEN;
+/*** **/
+bot.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.TOKEN);
+bot.setYoutubeKey(process.env.YOUTUBE_KEY);
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -21,12 +31,16 @@ client.on('message', (message) => {
         message.reply(message.author.avatarURL);
     }
     if (message.author.id !== '306474787180511233') {
+        //sfw
         fun.getMessage(message);
         pr0gramm.getMessage(message);
-        apiE621.getMessage(message);
         love.getMessage(message);
         server.getMessage(message);
         getHelp(message);
+        //nsfw
+        if (message.channel.nsfw) {
+            apiE621.getMessage(message);
+        }
     }
 });
 // Create a new webhook
@@ -42,7 +56,7 @@ function getHelp(message) {
         help += "Gay : Parce que vous voulez savoir si c'est gay\n";
         help += "/furry <tag> : deviner ?\n";
         help += "\n";
-        help += "/addName <name> : ajoute un mot Clé\n";
+        help += "/addKey <name> : ajoute un mot Clé\n";
         help += "/addM <name> <sentence> : ajoute une phrase à votre mot clé ;)\n";
         help += "<name> : utilisez votre mot clé !\n";
         help += "/love <name1> <name2> : calculateur d'amour ! <3\n";

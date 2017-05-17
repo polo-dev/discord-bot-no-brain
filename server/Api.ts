@@ -16,14 +16,11 @@ module.exports = {
       case '/delkey':
           KeywordController.deleteKeyword(message, splitMessage[1])
         break;
-      case '/addmessage':
+      case '/addm':
           SentenceController.addSentence(message, splitMessage[1], splitMessage)
         break;
-      case '/test':
-          SentenceController.getSentenceByKey(message, splitMessage[1])
-        break;
       case '/test1':
-          KeywordController.getKeywords(message)
+          console.log (await KeywordController.getKeywords(message))
         break;
       default:
         for (var i = 0; i < keys.length; i++)

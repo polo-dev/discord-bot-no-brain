@@ -5,6 +5,7 @@
       "app/e621.ts",
       "app/app.ts",
       "app/love.ts",
+      "app/music.ts",
       "server/**"
     ],
     "compilerOptions": {
