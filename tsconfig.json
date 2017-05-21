@@ -6,6 +6,7 @@
       "app/app.ts",
       "app/love.ts",
       "app/music.ts",
+      "app/admin.ts",
       "server/**"
     ],
     "compilerOptions": {

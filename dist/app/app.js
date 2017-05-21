@@ -5,12 +5,14 @@ const pr0gramm = require('./pr0gramm.js');
 const fun = require('./fun.js');
 const apiE621 = require('./e621.js');
 const love = require('./love.js');
+const admin = require('./admin.js');
 const server = require('../server/Api.js');
 const bot = require("discord-music-bot");
+exports.Client = client;
 // music
-var serverName = "supdeweb-3wa";
-var textChannelName = "etudiants";
-var voiceChannelName = "General";
+var serverName = "From Garen to Mclaren";
+var textChannelName = "test";
+var voiceChannelName = "General \uD83D\uDC83";
 var aliasesFile = "/files";
 var botToken = process.env.TOKEN;
 /*** **/
@@ -21,27 +23,24 @@ client.on('ready', () => {
 });
 // Create an event listener for messages
 client.on('message', (message) => {
-    // If the message is "ping"
-    if (message.content === 'ping') {
-        // Send "pong" to the same channel
-        message.channel.send('pong');
+    if (message.author.bot)
+        return;
+    //if (!message.content.startsWith('.')) return;
+    if (message.author.id === '179694444168085507') {
+        admin.getMessage(message, client);
     }
-    if (message.content === 'what is my avatar') {
-        // Send the user's avatar URL
-        message.reply(message.author.avatarURL);
+    //if(message.author.id !== '306474787180511233') {
+    //sfw
+    fun.getMessage(message, client);
+    pr0gramm.getMessage(message);
+    love.getMessage(message);
+    server.getMessage(message);
+    getHelp(message);
+    //nsfw
+    if (message.channel.nsfw) {
+        apiE621.getMessage(message);
     }
-    if (message.author.id !== '306474787180511233') {
-        //sfw
-        fun.getMessage(message);
-        pr0gramm.getMessage(message);
-        love.getMessage(message);
-        server.getMessage(message);
-        getHelp(message);
-        //nsfw
-        if (message.channel.nsfw) {
-            apiE621.getMessage(message);
-        }
-    }
+    //}
 });
 // Create a new webhook
 //const hook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_TOKEN);

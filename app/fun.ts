@@ -1,45 +1,34 @@
 const jsonfile = require('jsonfile');
 const file = 'dist/data/wtf.json';
-
 module.exports = {
-  getMessage: function (message: any)
+  getMessage: function (message: any, client: any)
   {
     var data = jsonfile.readFileSync(file)
     var splitMessage = message.content.split(" ")
     var msg = message.content.toLowerCase()
 
-    if(msg.includes('gay'))
+    if (message.content === 'ping')
+    {
+      message.channel.send('pong');
+    }
+    else if (message.content === 'what is my avatar')
+    {
+      // Send the user's avatar URL
+      message.reply(message.author.avatarURL);
+    }
+    else if(msg.includes('gay'))
     {
       this.getGay(message);
     }
-    /*
-    if (splitMessage[0] === "/addM")
-    {
-      for (var i = 0; i < data.name.length; i++)
-      {
-        if (splitMessage[1].toLowerCase() === data.name[i])
-        {
-          this.addMessageName(message, data.name[i], data, splitMessage);
-        }
-      }
+    if(splitMessage[0].toLowerCase() === '/avatar') {
+      const User = client.fetchUser(splitMessage[1])
+      User.then((u) => {
+          message.channel.send(u.avatarURL)
+      }).catch((e) => {
+        console.error
+        message.channel.send('oups, j\'ai pas trouvé :/')
+      });
     }
-    else if(splitMessage[0] === "/addName")
-    {
-      if(splitMessage[1].length < 25)
-        this.addName(message, splitMessage[1], data, splitMessage)
-      else
-        message.reply("Le nom est trop long ! (CMB)")
-    }*/
-    /*else
-    {
-      for (var i = 0; i < data.name.length; i++)
-      {
-        if (msg.includes(data.name[i]))
-        {
-          this.getMessageName(message, data.name[i], data);
-        }
-      }
-    }*/
   },
   getGay: function (message: any)
   {
