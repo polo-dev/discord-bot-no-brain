@@ -139,7 +139,7 @@ module.exports = {
         body = JSON.parse(body);
         message.channel.send(body.description);
         message.channel.send('Compatible avec: ' + getKeyByValue(translation, body.compatibility.toLowerCase()));
-        message.channel.send('Hummeur: ' + body.mood);
+        message.channel.send('Humeur: ' + body.mood);
         message.channel.send('Couleur: ' + body.color);
         message.channel.send('Nombre porte bonheur: ' + body.lucky_number);
         message.channel.send('Heure de chance: ' + body.lucky_time);
