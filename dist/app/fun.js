@@ -1,5 +1,6 @@
 const jsonfile = require('jsonfile');
 const file = 'dist/data/wtf.json';
+var request = require('request');
 module.exports = {
     getMessage: function (message, client) {
         var data = jsonfile.readFileSync(file);
@@ -15,6 +16,9 @@ module.exports = {
         else if (msg.includes('gay')) {
             this.getGay(message);
         }
+        if (msg.includes('inspirobot')) {
+            this.getInspiroBotQuote(message);
+        }
         if (splitMessage[0].toLowerCase() === '/avatar') {
             const User = client.fetchUser(splitMessage[1]);
             User.then((u) => {
@@ -23,6 +27,9 @@ module.exports = {
                 console.error;
                 message.channel.send('oups, j\'ai pas trouvé :/');
             });
+        }
+        else if (splitMessage[0].toLowerCase() === '/horoscope') {
+            this.getHoroscope(message, splitMessage[1]);
         }
     },
     getGay: function (message) {
@@ -73,5 +80,57 @@ module.exports = {
         var random = Math.floor(Math.random() * arrayStrings.length);
         console.log("get message : " + arrayStrings[random]);
         message.channel.send(arrayStrings[random]);
+    },
+    getInspiroBotQuote: function (message) {
+        request('http://inspirobot.me/api?generate=true', function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+                message.channel.send(body);
+            }
+            else {
+                message.channel.send('Une erreur est survenue :/');
+            }
+        });
+    },
+    getHoroscope: function (message, sign) {
+        sign = sign.toLowerCase();
+        let translation = {
+            'bélier': 'aries',
+            'taureau': 'taurus',
+            'gémeaux': 'gemini',
+            'cancer': 'cancer',
+            'lion': 'leo',
+            'vierge': 'virgo',
+            'balance': 'libra',
+            'scorpion': 'scorpio',
+            'sagittaire': 'sagittarius',
+            'capricorne': 'capricorn',
+            'verseau': 'aquarius',
+            'poisson': 'pisces',
+        };
+        let options = {
+            url: 'https://aztro.sameerkumar.website/?sign=' + translation[sign] + '&day=today',
+            method: 'POST'
+        };
+        function getKeyByValue(object, value) {
+            return Object.keys(object).find(key => object[key] === value);
+        }
+        function callback(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+                body = JSON.parse(body);
+                message.channel.send(body.description);
+                message.channel.send('Compatible avec: ' + getKeyByValue(translation, body.compatibility.toLowerCase()));
+                message.channel.send('Hummeur: ' + body.mood);
+                message.channel.send('Couleur: ' + body.color);
+                message.channel.send('Nombre porte bonheur: ' + body.lucky_number);
+                message.channel.send('Heure de chance: ' + body.lucky_time);
+            }
+            else {
+                message.channel.send('Une erreur est survenue :/');
+                console.log(error);
+            }
+        }
+        request(options, callback);
     }
 };

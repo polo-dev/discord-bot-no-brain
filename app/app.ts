@@ -7,22 +7,26 @@ const apiE621 = require('./e621.js');
 const love = require('./love.js');
 const admin = require('./admin.js');
 const server = require('../server/Api.js');
-const bot = require("discord-music-bot");
+// const bot = require("discord-music-bot");
 exports.Client = client;
 
 // music
-var serverName = "From Garen to Mclaren";
 var textChannelName = "test";
-var voiceChannelName = "General \uD83D\uDC83";
+var voiceChannelName = "General";
 var aliasesFile = "/files";
 var botToken = process.env.TOKEN;
 /*** **/
-bot.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.TOKEN);
-bot.setYoutubeKey(process.env.YOUTUBE_KEY);
+
 
 
 client.on('ready', () => {
   console.log('I am ready!');
+  var guild = (client.guilds.find('id', '179693296447258625'));
+  var serverName = guild.name; 
+  var voiceChannelName = guild.channels.find('id', '179693297319542785').name;
+  console.log(voiceChannelName);
+  // bot.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.TOKEN);
+  // bot.setYoutubeKey(process.env.YOUTUBE_KEY);
 });
 
 // Create an event listener for messages
@@ -62,16 +66,18 @@ function getHelp(message: any)
 {
   if(message.content === '/help')
   {
-    var help = "```Pr0 <tag> : image de pr0gramm\n"
+    var help = "```Pr0 <tag> : Image de pr0gramm\n"
     help += "Pr0-vid <tag> : mp4 de pr0gramm\n"
-    help += "Pr0-all <tag> : image ou mp4 de pr0gramm\n"
+    help += "Pr0-all <tag> : Image ou mp4 de pr0gramm\n"
+    help += "inspirobot : C'est bien de s'inspirer parfois\n"
     help += "Gay : Parce que vous voulez savoir si c'est gay\n"
-    help += "/furry <tag> : deviner ?\n"
+    help += "/furry <tag> : Deviner ?\n"
+    help += "/horoscope <signe> : Obtenir son horoscope du jour!\n"
     help += "\n"
-    help += "/addKey <name> : ajoute un mot Clé\n"
-    help += "/addM <name> <sentence> : ajoute une phrase à votre mot clé ;)\n"
-    help += "<name> : utilisez votre mot clé !\n"
-    help += "/love <name1> <name2> : calculateur d'amour ! <3\n"
+    help += "/addKey <name> : Ajoute un mot Clé\n"
+    help += "/addM <name> <sentence> : Ajoute une phrase à votre mot clé ;)\n"
+    help += "<name> : Utilisez votre mot clé !\n"
+    help += "/love <name1> <name2> : Calculateur d'amour ! <3\n"
     help += "```"
     message.channel.send(help)
   }
